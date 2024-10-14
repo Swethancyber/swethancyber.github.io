@@ -9,5 +9,5 @@ outputs:
 - rss
 - json
 ---
-Entry-Level Cybersecurity and front end Professional With a Passion for Securing
+Entry-Level Cybersecurity and Front End developer Professional With a Passion for Securing
 Digital Environments
