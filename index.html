@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swethan B</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Color Palette */
+    :root {
+      --primary-accent: #00bcd4; /* Cyan - A techy, modern feel */
+      --secondary-accent: #ff9800; /* Orange - For highlights/CTAs */
+      --dark-background: #1a1a2e; /* Deep dark blue/purple */
+      --light-text: #e0e0e0; /* Off-white for readability */
+      --medium-text: #a0a0a0; /* Grey for subtle details */
+      --card-bg: #2a2a4a; /* Slightly lighter dark for cards */
+      --border-color: rgba(0, 188, 212, 0.3); /* Transparent primary accent for borders */
+    }
+
+    /* General Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif; /* Modern, clean sans-serif */
+      background: var(--dark-background); /* Fallback solid background */
+      color: var(--light-text);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+    }
+
+    /* Thai GIF Background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3Fuc3EwdnE2N2dyenM3bmNiOTQzNGZocDdqb284amcydnM3YngyeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4Ev0Ari2Nd9io/200.webp') center/cover no-repeat fixed; /* REPLACE THIS URL */
+      background-color: var(--dark-background); /* Fallback if GIF doesn't load */
+      opacity: 0.8; /* Adjust opacity to make text readable */
+      /* Optional: Add a subtle overlay for better text contrast */
+      box-shadow: inset 0 0 0 1000px rgba(26, 26, 46, 0.6); /* Dark overlay */
+    }
+
+    /* Startup Animation - Glitch + Clockwise Effect */
+    #startup {
+      position: fixed;
+      inset: 0;
+      background: var(--dark-background);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: startupFadeOut 3.5s forwards;
+      overflow: hidden;
+    }
+
+    .glitch-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 150px; /* Increased font size for a more prominent symbol */
+      font-weight: 700;
+      color: var(--primary-accent);
+      text-shadow: 0 0 15px rgba(0, 188, 212, 0.7);
+      position: relative;
+      opacity: 0;
+      /* Combined animations for fade-in, glitch, and rotation */
+      animation: glitchFadeIn 1s ease-in-out 0.5s forwards, rotate-s 3s linear infinite;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark-background);
+      overflow: hidden;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -2px 0 var(--secondary-accent);
+      animation: glitch-before 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    }
+
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: -2px 0 var(--primary-accent);
+      animation: glitch-after 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    }
+
+    @keyframes glitchFadeIn {
+      to { opacity: 1; letter-spacing: 0px; }
+    }
+
+    @keyframes glitch-before {
+      0% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      5% { transform: translate(-5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      10% { transform: translate(5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      15% { transform: translate(-5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      20% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      25% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      30% { transform: translate(-5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      /* ... more steps for a randomized glitch effect ... */
+      100% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    }
+
+    @keyframes glitch-after {
+      0% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      5% { transform: translate(5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      10% { transform: translate(-5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      15% { transform: translate(5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      20% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      25% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      30% { transform: translate(5px, 0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      /* ... more steps for a randomized glitch effect ... */
+      100% { transform: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    }
+
+    /* New clockwise rotation animation */
+    @keyframes rotate-s {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Final fade out for the entire screen */
+    @keyframes startupFadeOut {
+      0% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* Navigation */
+    nav {
+      background-color: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    nav li {
+      color: var(--medium-text);
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    nav li::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 2px;
+      background: var(--primary-accent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    nav li:hover, nav li.active {
+      color: var(--primary-accent);
+      transform: translateY(-3px);
+    }
+
+    nav li:hover::after, nav li.active::after {
+      transform: scaleX(1);
+    }
+
+    /* Section Content */
+    .content-section {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 40px 50px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      display: none;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideIn 0.6s ease-out forwards;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--primary-accent);
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--secondary-accent);
+      border-radius: 5px;
+    }
+
+    /* About Section */
+    .about-content {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-content img {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 8px rgba(0, 188, 212, 0.4), 0 0 25px rgba(0, 188, 212, 0.7);
+      transition: transform 0.4s ease;
+    }
+
+    .about-content img:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .about-content div {
+      flex: 1;
+      min-width: 300px;
+      font-size: 1.1rem;
+      color: var(--light-text);
+      line-height: 1.8;
+    }
+
+    /* Project Section */
+    .project-grid {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      margin-top: 20px;
+    }
+
+    .project-card {
+      background: linear-gradient(145deg, var(--card-bg), #1f1f3a);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      border: 1px solid rgba(0, 188, 212, 0.2);
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(0,188,212,0.4);
+      background: linear-gradient(145deg, #3a3a5a, var(--card-bg));
+    }
+
+    .project-card h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--primary-accent);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .project-card p {
+      color: var(--medium-text);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .project-card a {
+      color: var(--secondary-accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .project-card a:hover {
+      color: var(--primary-accent);
+      transform: translateX(5px);
+    }
+
+    /* Connect Section */
+    .connect-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, rgba(0, 188, 212, 0.15), rgba(0, 188, 212, 0.05));
+      padding: 30px 40px;
+      border-radius: 18px;
+      max-width: 700px;
+      box-shadow: 0 5px 20px rgba(0,188,212,0.2);
+      border: 1px solid rgba(0, 188, 212, 0.4);
+    }
+
+    .cta p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      color: var(--light-text);
+    }
+
+    .links {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: var(--secondary-accent);
+      text-decoration: none;
+      position: relative;
+      font-weight: 600;
+      padding-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .links a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: var(--primary-accent);
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .links a:hover {
+      color: var(--primary-accent);
+    }
+
+    .links a:hover::after {
+      width: 100%;
+    }
+
+    /* Contact Form */
+    form {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 650px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form label {
+      color: var(--primary-accent);
+      font-weight: 600;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 188, 212, 0.3);
+      color: var(--light-text);
+      background-color: #111122;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--primary-accent);
+      box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3);
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    form button {
+      background: var(--secondary-accent);
+      color: var(--dark-background);
+      font-weight: bold;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      align-self: flex-end;
+    }
+
+    form button:hover {
+      background: #ffb74d;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+    }
+
+    #form-success {
+      color: var(--primary-accent);
+      font-size: 1rem;
+      margin-top: 15px;
+      text-align: center;
+      display: none;
+    }
+
+    /* Resume Section */
+    .resume-download-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: var(--primary-accent);
+      color: var(--dark-background);
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1.1rem;
+      margin-top: 30px;
+    }
+
+    .resume-download-btn:hover {
+      background-color: #00d1e0;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4);
+    }
+
+    .resume-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .resume-display iframe {
+      width: 100%;
+      max-width: 900px;
+      height: 700px;
+      border-radius: 15px;
+      border: 2px solid var(--primary-accent);
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+    }
+
+    /* Scroll To Top Button */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: var(--secondary-accent);
+      color: var(--dark-background);
+      font-weight: bold;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    #scrollTopBtn:hover {
+      background: var(--primary-accent);
+      color: var(--dark-background);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 188, 212, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.5);
+      margin-top: 80px;
+      font-weight: 500;
+      color: var(--medium-text);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .heart {
+      color: var(--primary-accent);
+      font-size: 1.4rem;
+      animation: beat 1.2s infinite ease-in-out;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    /* Responsive Adjustments */
+    @media(max-width: 768px) {
+      nav ul {
+        gap: 20px;
+      }
+      nav li {
+        font-size: 1rem;
+      }
+      .content-section {
+        margin: 30px auto;
+        padding: 25px 30px;
+      }
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .about-content img {
+        margin-bottom: 20px;
+      }
+      .project-card {
+        padding: 20px;
+      }
+      .project-card h3 {
+        font-size: 1.3rem;
+      }
+      .links {
+        flex-direction: column;
+        gap: 15px;
+      }
+      form {
+        padding: 25px;
+      }
+      .resume-display iframe {
+        height: 500px;
+      }
+    }
+
+    @media(max-width: 480px) {
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      nav li {
+        font-size: 0.9rem;
+      }
+      .glitch-text {
+        font-size: 100px; /* Adjust font size for small screens */
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      .content-section {
+        padding: 20px 15px;
+      }
+      .cta {
+        padding: 20px;
+      }
+      .links a {
+        font-size: 0.95rem;
+      }
+      #scrollTopBtn {
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
+        bottom: 20px;
+        right: 20px;
+      }
+      #startup {
+        animation: startupFadeOut 1.5s forwards;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="startup">
+    <div class="glitch-text" data-text="S">S</div>
+  </div>
+
+  <nav>
+    <ul>
+      <li id="nav-about" onclick="navigate('about')">About Me</li>
+      <li id="nav-projects" onclick="navigate('projects')">Projects</li>
+      <li id="nav-connect" onclick="navigate('connect')">Connect</li>
+      <li id="nav-resume" onclick="navigate('resume')">Resume</li>
+    </ul>
+  </nav>
+
+  <section id="about" class="content-section">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <img src="/home/frixy/swethan_project/work/5b1ff360-6883-4709-8062-305dd526751c.jpeg" alt="/home/frixy/swethan_project/work/5b1ff360-6883-4709-8062-305dd526751c.jpeg" /> <div>
+        <p>I'm a passionate Python Developer focused on building smart and efficient solutions.Python-based applications.Skilled in basic cybersecurity, networking, and system administration.Comfortable working in Linux, Windows, and IoT environments.I also have experience with embedded systems.Always eager to learn, build, and turn ideas into real-world software.</p>
+  </section>
+
+  <section id="projects" class="content-section">
+    <h2>My Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3><i class="fas fa-spider"></i>Audible-PDF</h3>
+        <p>This allows users to load a PDF file and hear its contents read aloud using customizable voice settings and a user-friendly GUI built with Tkinter.</p>
+        <a href="https://github.com/Swethancyber/AudiblePDF" target="_blank">View Code <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="project-card">
+        <h3><i class="fas fa-chart-line"></i>Note-Taking-Application</h3>
+        <p>A simple note-taking app with simple UI.</p>
+        <a href="https://github.com/Swethancyber/note-taking-application" target="_blank">View Code <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="project-card">
+        <h3><i class="fas fa-brain"></i>Portfolio</h3>
+        <p>My portFfolio using HTML,CSS,JS</p>
+        <a href="https://github.com/yourusername/ml-project" target="_blank">View Code <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="project-card">
+        <h3><i class="fas fa-robot"></i>Weather-application</h3>
+        <p>Simple Weather-application with map and UI using Tkinter</p>
+        <a href="https://github.com/yourusername/automation-script" target="_blank">View Code <i class="fas fa-external-link-alt"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="connect" class="content-section">
+    <h2>Connect with Me</h2>
+    <div class="connect-content">
+      <div class="cta">
+        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!</p>
+        <div class="links">
+          <a href="techpy252c@example.com"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://github.com/Swethancyber" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://linkedin.com/in/swethan Balaji" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://www.reddit.com/user/u/Active_Lime_" target="_blank"><i class="fab fa-reddit"></i> Reddit</a>
+        </div>
+      </div>
+
+      <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Your Name" />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="your.email@example.com" />
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required placeholder="Your message..."></textarea>
+
+        <button type="submit">Send Message</button>
+        <p id="form-success">Thank you for your message! I'll get back to you soon.</p>
+      </form>
+    </div>
+  </section>
+
+  <section id="resume" class="content-section">
+    <h2>My Resume</h2>
+    <div class="resume-display">
+      <iframe src="/home/frixy/swethan_project/work/SWETHAN B CV.pdf" frameborder="0" title="Your Resume"></iframe>
+    </div>
+    <div style="text-align: center;">
+      <a href="/home/frixy/swethan_project/work/SWETHAN B CV.pdf" download="Swethan_Resume.pdf" class="resume-download-btn">Download Resume <i class="fas fa-download"></i></a>
+    </div>
+  </section>
+
+  <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+  <footer>
+    <p>Grateful to the open-source community for inspiring my development journey.</p>
+  </footer>
+
+  <script>
+    // Initial startup animation
+    window.addEventListener('load', () => {
+      const startupScreen = document.getElementById('startup');
+      const aboutNavItem = document.getElementById('nav-about');
+      const aboutSection = document.getElementById('about');
+
+      startupScreen.addEventListener('animationend', () => {
+        startupScreen.style.display = 'none';
+        aboutNavItem.classList.add('active');
+        aboutSection.classList.add('active');
+      });
+    });
+
+    // Navigation function
+    function navigate(sectionId) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      const navItems = document.querySelectorAll('nav li');
+      navItems.forEach(item => item.classList.remove('active'));
+
+      document.getElementById(sectionId).classList.add('active');
+      document.getElementById('nav-' + sectionId).classList.add('active');
+    }
+
+    // Scroll to top button visibility
+    window.addEventListener('scroll', () => {
+      document.getElementById('scrollTopBtn').style.display = window.scrollY > 400 ? 'block' : 'none';
+    });
+
+    // Smooth scroll to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Contact Form Submission (Basic Example - for actual use, you'd need a backend)
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formSuccess = document.getElementById('form-success');
+      formSuccess.style.display = 'block';
+      this.reset();
+
+      setTimeout(() => {
+        formSuccess.style.display = 'none';
+      }, 5000);
+    });
+
+    // Set initial active state for "About Me" on page load if not already set by startup animation
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('startup').style.display === 'none') {
+        document.getElementById('nav-about').classList.add('active');
+        document.getElementById('about').classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
